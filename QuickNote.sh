@@ -2,10 +2,11 @@
 
 #Add the path to the inbox file below
 inbox_file="path/to/inbox/file"
+# TODO if $1 not empty then inbox_file=$1
 
 #Choose dialog application
 #dialog_application=zenity
-dialog_application=kdialog
+dialog_application=dialog
 
 #Choose Zenity dialog type
 zenity_multiline=yes
@@ -25,6 +26,14 @@ elif [ "$dialog_application" == "zenity" ]; then
     if ! input=$(zenity --text-info --editable --title="Add Note" --text="'-' to start with a bullet point, 'esc' to close without saving"); then
       exit
     fi
+elif [ "$dialog_application" == "dialog" ]; then
+  # TODO if file does not exist
+  touch $inbox_file
+  cat "'-' to start with a bullet point, 'esc' to close without saving" > $inbox_file
+  #if [ "$zenity_multiline" == "yes" ];then
+    if ! input=$(dialog --title "Editbox" --backtitle "Edit Note" --editbox $inbox_file 16 50); then
+      exit
+    fi    
   else
     if ! input=$(zenity --entry --title="Add Note" --text="'-' to start with a bullet point, 'esc' to close without saving, enter to submit"); then
       exit
