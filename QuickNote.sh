@@ -32,6 +32,7 @@ elif [ "$dialog_application" == "dialog" ]; then
   if [! -f "$inbox_file" ]; then
     touch $inbox_file
     cat "'-' to start with a bullet point, 'esc' to close without saving" > $inbox_file
+    fi
   #if [ "$zenity_multiline" == "yes" ];then
     if ! input=$(dialog --title "Editbox" --backtitle "Edit Note" --editbox $inbox_file 16 50); then
       exit
