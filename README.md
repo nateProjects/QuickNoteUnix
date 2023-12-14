@@ -30,3 +30,6 @@ This is based on https://github.com/Guy-92/QuickNoteLinux by Guy-92.
 I wanted one script I could use from the commandline on my home Mac or Linux server, or at work on WSL Linux.
 
 I also wanted to add the ability to pick a particular note to edit from the commandline.
+-e 
+<!-- 2023-12-14 12:33:54 -->$
+
