@@ -2,7 +2,8 @@
 
 #Add the path to the inbox file below
 inbox_file="path/to/inbox/file"
-# TODO if $1 not empty then inbox_file=$1
+#If commandline path ($1) assign to inbox_file
+if [ -z "$1" ] inbox_file=$1
 
 #Choose dialog application
 #dialog_application=zenity
@@ -28,8 +29,9 @@ elif [ "$dialog_application" == "zenity" ]; then
     fi
 elif [ "$dialog_application" == "dialog" ]; then
   # TODO if file does not exist
-  touch $inbox_file
-  cat "'-' to start with a bullet point, 'esc' to close without saving" > $inbox_file
+  if [! -f "$inbox_file" ]; then
+    touch $inbox_file
+    cat "'-' to start with a bullet point, 'esc' to close without saving" > $inbox_file
   #if [ "$zenity_multiline" == "yes" ];then
     if ! input=$(dialog --title "Editbox" --backtitle "Edit Note" --editbox $inbox_file 16 50); then
       exit
